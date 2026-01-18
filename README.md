@@ -66,16 +66,22 @@ This project is built for **Enterprise Readiness**. While currently configured f
 
 ---
 
+## ⚖️ Compliance & Governance Frameworks
+This architecture is designed to meet the rigorous data protection standards required by global regulatory bodies. By utilizing **Azure Private Link** and **Isolated VNet** configurations, this project aligns with:
+
+* **GDPR (EU):** Ensures data residency and sovereignty; no data is sent to public models for training.
+* **EU AI Act:** Implements "Human-in-the-loop" transparency via source citations and verifiable grounding.
+* **HIPAA / HITRUST (US):** Supports encryption-at-rest and in-transit for Protected Health Information (PHI).
+* **SOC2 / ISO 27001:** Provides the logging, monitoring, and identity isolation (RBAC) required for enterprise security audits.
+* **NIST AI 100-1:** Aligns with the AI Risk Management Framework (AI RMF) for trustworthy AI deployment.
+
+---
+
 ## 👨‍💻 Author
-**Jose Lugo** *Senior Systems Administrator | ISSO | CISSP | Security+*
+**Jose Lugo** *Infrastructure Security Expert & AI Solutions Architect*
 
-A 12-year **U.S. Army Veteran** (HUMINT & Civil Affairs) and current **Senior Windows Systems Administrator** with a career dedicated to safeguarding mission-critical information systems. 
+A 12-year **U.S. Army Veteran** and **Senior Systems Administrator** specializing in the intersection of **Cybersecurity (CISSP/Security+)** and Generative AI. Based in Germany, I bridge the gap between complex US-based security frameworks and European data sovereignty requirements.
 
-I specialize in **Hardened Infrastructure**, leveraging deep expertise in:
-* **Compliance:** Implementing STIGs, RMF, and NIST frameworks within Lockheed Martin and V2X environments.
-* **Identity & Access:** Managing Active Directory, GPOs, and Certificate Authorities (CAs) for high-security networks.
-* **Automation:** Using PowerShell to bridge the gap between legacy systems and modern cloud architecture.
-
-**The Mission:** This project represents my transition into **AI Security**, applying a "Zero-Trust" mindset to Generative AI. I build RAG solutions that respect the same strict security protocols (STIGs/VNet isolation) required by the US Department of Defense and global enterprise leaders.
+**The Mission:** I build "Zero-Trust" AI solutions designed for high-consequence industries (Finance, Healthcare, and Legal). My work focuses on deploying RAG architectures that are not only high-performing but are built from the ground up to be **audit-ready** and compliant with global standards.
 
 [![LinkedIn](https://www.linkedin.com/in/jose-lugo-cissp-327045308/)](https://www.linkedin.com/in/jose-lugo-cissp-327045308/)
