@@ -1,86 +1,84 @@
-# 🛡️ Secure-KB-Assistant: Enterprise RAG Architecture
-**A Security-First Internal Knowledge Base powered by Azure OpenAI & LangChain.**
+# Secure-KB-Assistant: Enterprise RAG Architecture
+**Portfolio demo — security-first internal knowledge base on Azure OpenAI & LangChain.**
 
-[![Status](https://img.shields.io/badge/Status-Demo--Ready-success.svg)](#)
+[![Status](https://img.shields.io/badge/Status-Portfolio--Demo-lightgrey.svg)](#)
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](#)
 [![Security](https://img.shields.io/badge/Architecture-Zero--Trust-red.svg)](#)
 
-## 📖 Overview
-The **Secure-KB-Assistant** is a Retrieval-Augmented Generation (RAG) solution designed for regulated industries (Finance, Healthcare, Government). It allows employees to query sensitive internal PDF documents (Security STIGs, HR Policies, Compliance Manuals) while ensuring data never leaves the private corporate perimeter.
+> **This is a portfolio / demo artifact, not a production product and not a client deployment.** The public repo is the demo configuration. My core offer is Microsoft 365 Copilot GDPR consulting: **[joselugo.de](https://joselugo.de)**.
 
-### Key Highlights:
-* **🔒 Data Privacy:** 100% hosted within Azure; zero training on public models.
-* **📚 Deep Context:** Processes complex PDF structures using LangChain & Azure AI Search.
-* **✅ Fact-Grounded:** Includes automatic source citations to prevent AI hallucinations.
-* **🏗️ Infrastructure-Ready:** Built with a staged Virtual Network (VNet) for Private Link isolation.
+## Overview
+**Secure-KB-Assistant** is a Retrieval-Augmented Generation (RAG) demo: query internal PDF documents (security STIGs, HR policies, compliance manuals) with answers grounded in retrieved sources. The design goal is that data stays in your Azure tenant rather than public-model training.
 
----
+### Key Highlights
+* **Data Privacy:** Hosted on Azure; no training on public models.
+* **Deep Context:** PDF structure via LangChain & Azure AI Search.
+* **Fact-Grounded:** Source citations to reduce hallucinations.
+* **Infrastructure-Ready:** Staged Virtual Network (VNet) notes for Private Link isolation.
 
-## 📐 Architecture
-![Enterprise RAG Diagram](./Hardened-Enterprise-RAG-Architecture.png) 
+## Architecture
+![Enterprise RAG Diagram](./Hardened%20Enterprise%20RAG%20Architecture.png)
 
-> **Architecture Note:** The diagram illustrates the "Hardened" production state (Private Endpoints + Disabled Public Access). This repository is configured for a rapid <10 minute cutover from public demo to fully isolated environment.
+> **Architecture note:** The diagram shows a *target* hardened state (private endpoints + disabled public access). This repository is the public demo; treat the VNet cutover as a documented direction, not a claim that this clone is already isolated.
 
----
+## Compliance & Governance Frameworks
+This architecture is aimed at the following standards (alignment of design, not a formal certification of this repo):
 
-## ⚖️ Compliance & Governance Frameworks
-This architecture is designed to meet the rigorous data protection standards required by global regulatory bodies. 
+* **GDPR (EU):** Data residency / sovereignty; no sending data to public models for training.
+* **EU AI Act:** Human-in-the-loop transparency via source citations and grounding.
+* **HIPAA / HITRUST (US):** Encryption-at-rest and in-transit patterns for PHI-style content.
+* **SOC2 / ISO 27001:** Logging, monitoring, and identity isolation (RBAC) as design themes.
+* **NIST AI 100-1:** AI Risk Management Framework (AI RMF) for trustworthy AI deployment.
 
-* **GDPR (EU):** Ensures data residency and sovereignty; no data is sent to public models for training.
-* **EU AI Act:** Implements "Human-in-the-loop" transparency via source citations and verifiable grounding.
-* **HIPAA / HITRUST (US):** Supports encryption-at-rest and in-transit for Protected Health Information (PHI).
-* **SOC2 / ISO 27001:** Provides the logging, monitoring, and identity isolation (RBAC) required for enterprise security audits.
-* **NIST AI 100-1:** Aligns with the AI Risk Management Framework (AI RMF) for trustworthy AI deployment.
+## Security & Hardening (CISSP Mindset)
+Built with **enterprise readiness** in mind. Currently configured as a public demo; the following is **staged / documented**, not implied to be live on this GitHub copy:
 
----
+* **Virtual Network (VNet):** `secure-kb-vnet` to isolate AI traffic.
+* **Private DNS Zones:** `openai.azure.com` and `search.windows.net`.
+* **Private Endpoints:** Direction of travel to disable public internet access.
+* **Managed Identity:** Passwordless authentication using Azure RBAC.
 
-## 🛡️ Security & Hardening (CISSP Mindset)
-This project is built for **Enterprise Readiness**. While currently configured for a public demo, the following architecture is staged:
-
-* **Virtual Network (VNet):** `secure-kb-vnet` is provisioned to isolate AI traffic.
-* **Private DNS Zones:** Configured for `openai.azure.com` and `search.windows.net`.
-* **Private Endpoints:** Staged for immediate cutover to disable public internet access.
-* **Managed Identity:** Prepared for passwordless authentication using Azure RBAC.
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Python 3.12+
-- Azure OpenAI & Azure AI Search Resources
+- Azure OpenAI and Azure AI Search resources
 
 ### Installation & Usage
-1. **Clone the repo:**
-   git clone https://github.com/JoseLugo-AI/secure-kb-bot.git
-   cd secure-kb-bot
+1. **Clone the repo** (GitHub name is `secure-kb.bot`):
 
-2. **Install dependencies:**
-   *(Includes LangChain, Azure SDKs, Streamlit, and PyPDF)*
-   pip install -r requirements.txt
+   ```bash
+   git clone https://github.com/JoseLugo-AI/secure-kb.bot.git
+   cd secure-kb.bot
+   ```
 
-3. **Configure Environment:** Create a .env file (use .env.example as a template) and add your Azure credentials.
+2. **Install dependencies** (this repo does not currently ship `requirements.txt` or `.env.example`):
 
-4. **Ingest Data:**
-   Place PDFs in the data/ folder and run:
+   ```bash
+   pip install streamlit python-dotenv langchain-community langchain-text-splitters langchain-openai pypdf azure-search-documents
+   ```
+
+3. **Configure environment:** Create a `.env` file with your Azure OpenAI and Azure AI Search credentials (endpoint, keys, deployment, index name).
+
+4. **Ingest data:** Create a `data/` folder, place PDFs there, then from the repo root:
+
+   ```bash
    python scripts/ingest_data.py
+   ```
 
-5. **Launch Chatbot:**
+5. **Launch chatbot:**
+
+   ```bash
    streamlit run scripts/app.py
+   ```
 
----
+## License & Contributions
+* **License:** MIT License — fork and adapt for internal use.
+* **Contributing:** Issues and pull requests welcome for security features or prompt engineering.
 
-## 📜 License & Contributions
-* **License:** MIT License – feel free to fork and adapt for your internal use.
-* **Contributing:** Issues and Pull Requests are welcome for improvements to security features or prompt engineering.
+## Author
+**Jose Lugo** — Infrastructure Security Expert & AI Solutions Architect
 
----
-
-## 👨‍💻 Author
-**Jose Lugo** *Infrastructure Security Expert & AI Solutions Architect*
-
-A 12-year **U.S. Army Veteran** and **Senior Systems Administrator** specializing in the intersection of **Cybersecurity (CISSP/Security+)** and Generative AI. Based in Germany, I bridge the gap between complex US-based security frameworks and European data sovereignty requirements.
+A 12-year **U.S. Army Veteran** and **Senior Systems Administrator** specializing in the intersection of **Cybersecurity (CISSP/Security+)** and Generative AI. Based in Germany. Core consulting offer: Microsoft 365 Copilot GDPR / DSGVO — [joselugo.de](https://joselugo.de).
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/jose-lugo-cissp-327045308/)
-
----
